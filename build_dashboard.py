@@ -24,26 +24,34 @@ def gl(r, c):
 
 # Embed data
 html = f"""<!DOCTYPE html>
-<html lang="zh"><head><meta charset="utf-8"><title>AOF Solver</title>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AOF Solver</title>
 <style>
 *{{box-sizing:border-box;margin:0;padding:0}}
-body{{font-family:'Segoe UI',Arial;background:#1a1a2e;color:#ddd;padding:10px}}
-h1{{color:#e94560;text-align:center;font-size:16px;margin:4px 0}}
-.bar{{background:#16213e;border-radius:8px;padding:7px 12px;margin:4px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}}
-.bar label{{font-size:12px;color:#888;font-weight:600}}
-.bar button{{background:#0f3460;color:#ccc;border:1px solid #333;padding:5px 12px;border-radius:3px;cursor:pointer;font-size:12px;font-weight:600}}
+body{{font-family:'Segoe UI',Arial;background:#1a1a2e;color:#ddd;padding:8px}}
+h1{{color:#e94560;text-align:center;font-size:clamp(14px,3vw,18px);margin:4px 0}}
+.bar{{background:#16213e;border-radius:8px;padding:7px 10px;margin:4px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}}
+.bar label{{font-size:clamp(10px,2vw,12px);color:#888;font-weight:600}}
+.bar button,.bar button.tog{{background:#0f3460;color:#ccc;border:1px solid #333;padding:4px 10px;border-radius:3px;cursor:pointer;font-size:clamp(10px,2vw,12px);font-weight:600}}
 .bar button.sel{{background:#e94560;color:#fff}}
-.bar button.tog{{color:#fff;border:none;padding:5px 12px;border-radius:3px;cursor:pointer;font-size:12px;font-weight:600}}
-.bar input[type=range]{{width:80px;accent-color:#e94560}}
-.bar .val{{font-size:11px;color:#4a90d9;min-width:28px}}
-.bar .vpi{{width:46px;background:#0f3460;color:#4a90d9;border:1px solid #333;border-radius:3px;padding:3px 5px;font-size:11px;text-align:center}}
-.heat{{background:#16213e;border-radius:8px;padding:10px;margin:6px 0}}
-.heat h3{{font-size:13px;color:#ccc;margin-bottom:6px}}
+.bar button.tog{{border:none}}
+.bar input[type=range]{{width:clamp(50px,15vw,80px);accent-color:#e94560}}
+.bar .val{{font-size:clamp(10px,2vw,11px);color:#4a90d9;min-width:26px}}
+.bar .vpi{{width:clamp(36px,10vw,46px);background:#0f3460;color:#4a90d9;border:1px solid #333;border-radius:3px;padding:2px 4px;font-size:clamp(9px,1.8vw,11px);text-align:center}}
+.heat{{background:#16213e;border-radius:8px;padding:8px;margin:6px 0;overflow-x:auto}}
+.heat h3{{font-size:clamp(11px,2.2vw,14px);color:#ccc;margin-bottom:6px}}
 .grid{{border-collapse:collapse}}
-.grid td{{width:46px;height:34px;text-align:center;border:2px solid #333;font-size:10px;font-weight:700;line-height:1.2;padding:1px;color:#fff;text-shadow:0 0 3px #000}}
-.grid th{{width:18px;height:18px;font-size:10px;color:#bbb}}
-.gain{{background:#16213e;border-radius:8px;padding:10px;margin:6px 0;font-size:11px;line-height:1.6}}
+.grid td{{width:clamp(28px,6.5vw,46px);height:clamp(22px,5vw,34px);text-align:center;border:1.5px solid #333;font-size:clamp(7px,1.6vw,10px);font-weight:700;line-height:1.2;padding:0;color:#fff;text-shadow:0 0 2px #000}}
+.grid th{{width:clamp(12px,3vw,18px);height:clamp(12px,3vw,18px);font-size:clamp(7px,1.6vw,10px);color:#bbb}}
+.gain{{background:#16213e;border-radius:8px;padding:8px;margin:6px 0;font-size:clamp(10px,2vw,11px);line-height:1.6}}
 .gain .pos{{color:#4a90d9}}.gain .neg{{color:#e94560}}
+.gain table{{font-size:clamp(9px,1.8vw,11px)}}
+@media(min-width:800px){{
+  .heat{{display:inline-block;vertical-align:top}}
+}}
+@media(max-width:600px){{
+  .bar{{padding:5px 8px;gap:4px}}
+  .bar button,.bar button.tog{{padding:3px 7px}}
+}}
 </style></head><body>
 <h1>AOF Solver | 8BB | Jackpot ON</h1>
 
