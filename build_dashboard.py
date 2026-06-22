@@ -83,7 +83,7 @@ h1{{color:#e94560;text-align:center;font-size:clamp(14px,3vw,18px);margin:4px 0}
 
 <div id="ch"></div>
 <div class="gain" id="gx">Computing...</div>
-<div style="text-align:center;font-size:10px;color:#555;margin-top:4px">快捷键: Tab=切位置 | Q/W/E=前位 | A=反选</div>
+<div style="text-align:center;font-size:10px;color:#555;margin-top:4px">F=切位置 | Q/W/E=前位 | A=反选 | 2/3/4=人数</div>
 
 <script>
 var EQ={json.dumps(equity)};
@@ -242,8 +242,9 @@ window.lbArr = window.tnArr;
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e){{
  var k=e.key?e.key.toLowerCase():String.fromCharCode(e.which||e.keyCode).toLowerCase();
- // Tab: always capture, cycle BB→SB→BTN→UTG
- if(e.which===9||e.keyCode===9||k==='tab'){{e.preventDefault();e.stopPropagation();setP((up-1+N)%N);return;}}
+ // F: cycle position BB→SB→BTN→UTG; 2/3/4: switch players
+ if(k==='f'){{e.preventDefault();e.stopPropagation();setP((up-1+N)%N);return;}}
+ if(k==='2'||k==='3'||k==='4'){{e.preventDefault();setN(parseInt(k));return;}}
  // Other keys: skip if in input
  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
  if(k==='q'&&up>0){{pp[0]=!pp[0];rn();cp();}}
