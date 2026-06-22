@@ -244,7 +244,7 @@ document.addEventListener('keydown', function(e){{
  var kc=e.which||e.keyCode;
  // Shortcut keys bypass input check
  // A(65): cycle pos BB→SB→BTN→UTG; R(82): all; Q(81)/W(87)/E(69): pre-pos; 2/3/4: players
- if(kc===65){{e.preventDefault();setP((up-1+N)%N);return;}}
+ if(kc===65){{e.preventDefault();sP((up-1+N)%N);return;}}
  if(kc===82){{e.preventDefault();tog();return;}}
  if(kc>=50&&kc<=52){{e.preventDefault();setN(kc-48);return;}}
  // Don't process other keys if editing VPIP
