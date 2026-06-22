@@ -239,18 +239,19 @@ function rst(){{sv={{l:33,r:38,u:64}};sy();rn();cp()}}
 window.tnArr = {json.dumps([gl(r,c) for r in range(13) for c in range(13)])};
 window.lbArr = window.tnArr;
 
-// Keyboard shortcuts
+// Keyboard shortcuts: use keyCode for reliability
 document.addEventListener('keydown', function(e){{
- var k=e.key?e.key.toLowerCase():String.fromCharCode(e.which||e.keyCode).toLowerCase();
- // A: cycle position BB→SB→BTN→UTG; 2/3/4: switch players
- if(k==='a'){{e.preventDefault();e.stopPropagation();setP((up-1+N)%N);return;}}
- if(k==='2'||k==='3'||k==='4'){{e.preventDefault();setN(parseInt(k));return;}}
- // Other keys: skip if in input
+ var kc=e.which||e.keyCode;
+ // Shortcut keys bypass input check
+ // A(65): cycle pos BB→SB→BTN→UTG; R(82): all; Q(81)/W(87)/E(69): pre-pos; 2/3/4: players
+ if(kc===65){{e.preventDefault();setP((up-1+N)%N);return;}}
+ if(kc===82){{e.preventDefault();tog();return;}}
+ if(kc>=50&&kc<=52){{e.preventDefault();setN(kc-48);return;}}
+ // Don't process other keys if editing VPIP
  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
- if(k==='q'&&up>0){{pp[0]=!pp[0];rn();cp();}}
- else if(k==='w'&&up>1){{pp[1]=!pp[1];rn();cp();}}
- else if(k==='e'&&up>2){{pp[2]=!pp[2];rn();cp();}}
- else if(k==='r'){{tog();}}
+ if(kc===81&&up>0){{pp[0]=!pp[0];rn();cp();}}
+ else if(kc===87&&up>1){{pp[1]=!pp[1];rn();cp();}}
+ else if(kc===69&&up>2){{pp[2]=!pp[2];rn();cp();}}
 }});
 
 setN(4);
