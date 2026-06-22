@@ -83,7 +83,7 @@ h1{{color:#e94560;text-align:center;font-size:clamp(14px,3vw,18px);margin:4px 0}
 
 <div id="ch"></div>
 <div class="gain" id="gx">Computing...</div>
-<div style="text-align:center;font-size:10px;color:#555;margin-top:4px">A=切位置 | Q/W/E=前位 | R=反选 | 2/3/4=人数</div>
+<div style="text-align:center;font-size:10px;color:#555;margin-top:4px">F/J=切位置 | QWE/UIO=前位 | 空格=反选 | 2/3/4=人数</div>
 
 <script>
 var EQ={json.dumps(equity)};
@@ -239,19 +239,18 @@ function rst(){{sv={{l:33,r:38,u:64}};sy();rn();cp()}}
 window.tnArr = {json.dumps([gl(r,c) for r in range(13) for c in range(13)])};
 window.lbArr = window.tnArr;
 
-// Keyboard shortcuts: use keyCode for reliability
+// Keyboard shortcuts: left=Q/W/E/F, right=U/I/O/J, space=all, 2/3/4=players
 document.addEventListener('keydown', function(e){{
  var kc=e.which||e.keyCode;
- // Shortcut keys bypass input check
- // A(65): cycle pos BB→SB→BTN→UTG; R(82): all; Q(81)/W(87)/E(69): pre-pos; 2/3/4: players
- if(kc===65){{e.preventDefault();sP((up-1+N)%N);return;}}
- if(kc===82){{e.preventDefault();tog();return;}}
+ // F(70)/J(74): cycle pos; space(32): toggle all; 2/3/4: players
+ if(kc===70||kc===74){{e.preventDefault();sP((up-1+N)%N);return;}}
+ if(kc===32){{e.preventDefault();tog();return;}}
  if(kc>=50&&kc<=52){{e.preventDefault();setN(kc-48);return;}}
- // Don't process other keys if editing VPIP
  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
- if(kc===81&&up>0){{pp[0]=!pp[0];rn();cp();}}
- else if(kc===87&&up>1){{pp[1]=!pp[1];rn();cp();}}
- else if(kc===69&&up>2){{pp[2]=!pp[2];rn();cp();}}
+ // Left hand: Q(81)/W(87)/E(69); Right hand: U(85)/I(73)/O(79)
+ if((kc===81||kc===85)&&up>0){{pp[0]=!pp[0];rn();cp();}}
+ else if((kc===87||kc===73)&&up>1){{pp[1]=!pp[1];rn();cp();}}
+ else if((kc===69||kc===79)&&up>2){{pp[2]=!pp[2];rn();cp();}}
 }});
 
 setN(4);
