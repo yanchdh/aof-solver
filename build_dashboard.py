@@ -239,14 +239,15 @@ function rst(){{sv={{l:33,r:38,u:64}};sy();rn();cp()}}
 window.tnArr = {json.dumps([gl(r,c) for r in range(13) for c in range(13)])};
 window.lbArr = window.tnArr;
 
-// Keyboard shortcuts: Tab=cycle pos(BB→SB→BTN→UTG), Q/W/E=toggle pre, A=all
+// Keyboard shortcuts: Tab=cycle pos(BB→SB→BTN→UTG), Q/W/E=toggle pre(按显示顺序), A=all
 document.addEventListener('keydown', function(e){{
- if(e.target.tagName==='INPUT')return;
+ if(e.target.tagName==='INPUT'&&e.key.toLowerCase()!=='tab')return;
  var k=e.key.toLowerCase();
- if(k==='tab'){{e.preventDefault();setP((up-1+N)%N);}}
- else if(k==='q'&&up>0){{pp[up-1]=!pp[up-1];rn();cp();}}
- else if(k==='w'&&up>1){{pp[up-2]=!pp[up-2];rn();cp();}}
- else if(k==='e'&&up>2){{pp[up-3]=!pp[up-3];rn();cp();}}
+ if(k==='tab'){{e.preventDefault();setP((up-1+N)%N);return;}}
+ if(e.target.tagName==='INPUT')return;
+ if(k==='q'&&up>0){{pp[0]=!pp[0];rn();cp();}}
+ else if(k==='w'&&up>1){{pp[1]=!pp[1];rn();cp();}}
+ else if(k==='e'&&up>2){{pp[2]=!pp[2];rn();cp();}}
  else if(k==='a'){{tog();}}
 }});
 
